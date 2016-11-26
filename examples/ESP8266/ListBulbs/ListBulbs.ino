@@ -2,7 +2,7 @@
 
 /*******************************************************************
  *  An example of lifx request that makes a request to the server  *
- *                                                                 *
+ *  Go to: https://cloud.lifx.com/settings for your token          *
  *  written by Joeybab3 (joeybab3 on Github)                       *
  *******************************************************************/
 
