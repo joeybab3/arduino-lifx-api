@@ -1,18 +1,17 @@
 #include <LifxApi.h>
 
-/******************************************************************************************
- *  An example of lifx request that makes a request to the server                         *
- *                                                                                        *
- *  written by Joeybab3 (joeybab3 on Github)                                              *
- *  http://www.joeybabcock.me/blog/projects/arduino-lifx-api-control-library-for-esp8266/ *
- ******************************************************************************************/
+/*******************************************************************
+ *  An example of lifx request that makes a request to the server  *
+ *                                                                 *
+ *  written by Joeybab3 (joeybab3 on Github)                       *
+ *******************************************************************/
 
 
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 #include <WiFiManager.h>
 
-#define API_KEY "cdd0291693115a96d23dc7bc8d9c6718c6e2581f003b3fbd79d5af74ddde12dd"  // your google apps API Token
+#define API_KEY "lifx-key"  // your google apps API Token
 #define SELECTOR "all" // find more selectors here https://api.developer.lifx.com/docs/selectors
 
 

@@ -42,7 +42,7 @@ String LifxApi::sendGetToLifx(String command) {
 		int ch_count=0;
 		client->print(String("GET ") + command + " HTTP/1.1\r\n" +
                "Host: " + HOST + "\r\n" + 
-               "Authorization: Bearer cdd0291693115a96d23dc7bc8d9c6718c6e2581f003b3fbd79d5af74ddde12dd \r\n" +
+               "Authorization: Bearer "+_apikey+" \r\n" +
                "Connection: close\r\n\r\n");
 		now=millis();
 		delay(1);
