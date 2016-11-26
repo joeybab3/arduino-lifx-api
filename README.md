@@ -4,4 +4,4 @@ You can read more about it here: http://www.joeybabcock.me/blog/projects/arduino
 
 It requires the [ArduinoJson Library](https://github.com/bblanchon/ArduinoJson)
 
-As of right now all it can really do is display the bulb stats, stuff like is it on, color, name, brightness.
+It can query the status of the bulb to find things like color/brightness/hue, as well as toggle the power.
