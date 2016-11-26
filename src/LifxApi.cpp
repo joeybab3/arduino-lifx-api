@@ -84,10 +84,10 @@ String LifxApi::sendGetToLifx(String command) {
 			yield();
 			
 			if (avail) {
-				Serial.println("Body:");
-				Serial.println(body);
-				Serial.println("END");
-				break;
+				//Serial.println("Body:");
+				//Serial.println(body);
+				//Serial.println("END");
+				//break;
 			}
 		}
 	}
