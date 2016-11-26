@@ -47,7 +47,7 @@ void loop() {
       Serial.println(api.bulbinfo.id);
       Serial.print("UUID: ");
       Serial.println(api.bulbinfo.uuid);
-      Serial.print("Label: ");
+      Serial.print("Label(name): ");
       Serial.println(api.bulbinfo.label);
       Serial.print("Power Status: ");
       Serial.println(api.bulbinfo.power);
