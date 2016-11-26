@@ -103,7 +103,9 @@ String LifxApi::sendGetToLifx(String command) {
 bool LifxApi::getBulbInfo(String selector){
   String command="https://api.lifx.com/v1/lights/"+selector; //try 'all' if you don't know what this is or: https://api.developer.lifx.com/docs/selectors
   String response = sendGetToLifx(command);       //recieve reply from Lifx
-  Serial.println("Got info.");
+  response = response.substring(6,response.length()-6);
+  Serial.println("Got info: ");
+  Serial.println(response);
   DynamicJsonBuffer jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(response);
   if(root.success()) {

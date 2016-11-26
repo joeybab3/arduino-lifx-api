@@ -29,10 +29,8 @@ void setup() {
 
   Serial.begin(115200);
 
-  // Set WiFi to station mode and disconnect from an AP if it was previously
-  // connected
-  WiFiManager wifiManager;
-  wifiManager.autoConnect();
+  WiFiManager wifiManager;// Set up wifimanager
+  wifiManager.autoConnect(); //Autoconnect to the last ap, if not create a network named ESPsomething and allow the user to configure it there.
 
   Serial.println("Connected to WiFi");
 
