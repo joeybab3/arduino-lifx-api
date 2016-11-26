@@ -60,7 +60,10 @@ void loop() {
 	  Serial.print("Saturation: ");
       Serial.println(api.bulbinfo.color.saturation);
       Serial.println("------------------------");
-
+	  if(api.togglePower("id:"+api.bulbinfo.id))
+	  {
+		  Serial.println("Sucess!");
+	  }
     }
     api_lasttime = millis();
   }

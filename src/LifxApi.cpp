@@ -26,7 +26,7 @@ LifxApi::LifxApi(String apiKey, Client &client)	{
   this->client = &client;
 }
 
-String LifxApi::sendGetToLifx(String command) {
+String LifxApi::sendReqToLifx(String command, String type) {
   String ourHeaders="Authorization: Bearer " + _apiKey;
   String headers="";
   String body="";
@@ -40,7 +40,7 @@ String LifxApi::sendGetToLifx(String command) {
 		String a="";
 		char c;
 		int ch_count=0;
-		client->print(String("GET ") + command + " HTTP/1.1\r\n" +
+		client->print(type + " " + command + " HTTP/1.1\r\n" +
                "Host: " + HOST + "\r\n" + 
                "Authorization: Bearer "+_apiKey+" \r\n" +
                "Connection: close\r\n\r\n");
@@ -100,10 +100,36 @@ String LifxApi::sendGetToLifx(String command) {
   return body;
 }
 
+bool LifxApi::togglePower(String selector){
+  Serial.println("Toggle power activated.");
+  String command="https://api.lifx.com/v1/lights/"+selector+"/toggle/"; //try 'all' if you don't know what this is or: https://api.developer.lifx.com/docs/selectors
+  String response = sendReqToLifx(command,"POST");       //recieve reply from Lifx
+  response = response.substring(4,response.length()-5);
+  Serial.println("Got info: ");
+  Serial.println(response);
+  DynamicJsonBuffer jsonBuffer;
+  JsonObject& root = jsonBuffer.parseObject(response);
+  if(root.success()) {
+	  Serial.println("Root success.");
+      String id = root["results"][0]["id"];
+      String label = root["results"][0]["label"];
+      String status = root["results"][0]["status"];
+	  Serial.println();
+      Serial.println("Id: "+id);
+	  Serial.println("Label: "+label);
+	  Serial.println("Status: "+status);
+	  Serial.println();
+	  
+      return true;
+  }
+  Serial.println("Root failed.");
+  return false;
+}
+
 bool LifxApi::getBulbInfo(String selector){
   String command="https://api.lifx.com/v1/lights/"+selector; //try 'all' if you don't know what this is or: https://api.developer.lifx.com/docs/selectors
-  String response = sendGetToLifx(command);       //recieve reply from Lifx
-  response = response.substring(6,response.length()-6);
+  String response = sendReqToLifx(command,"GET");       //recieve reply from Lifx
+  response = response.substring(response.indexOf("{"),response.lastIndexOf("}")+1);
   Serial.println("Got info: ");
   Serial.println(response);
   DynamicJsonBuffer jsonBuffer;
