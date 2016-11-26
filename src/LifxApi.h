@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #define MAX_BUFFER_SIZE 1250
 
 struct Color{
-	float brightness;
+	float saturation;
 	float hue;
 	long kelvin;
 };
@@ -44,6 +44,7 @@ struct BulbInfo{
   String label;
   bool connected;
   String power;
+  float brightness;
   Color color;
 };
 

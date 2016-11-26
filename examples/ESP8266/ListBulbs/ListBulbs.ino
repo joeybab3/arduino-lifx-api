@@ -51,6 +51,14 @@ void loop() {
       Serial.println(api.bulbinfo.label);
       Serial.print("Power Status: ");
       Serial.println(api.bulbinfo.power);
+	  Serial.print("Brightness: ");
+      Serial.println(api.bulbinfo.brightness);
+      Serial.print("Hue: ");
+      Serial.println(api.bulbinfo.color.hue);
+	  Serial.print("Kelvin: ");
+      Serial.println(api.bulbinfo.color.kelvin);
+	  Serial.print("Saturation: ");
+      Serial.println(api.bulbinfo.color.saturation);
       Serial.println("------------------------");
 
     }

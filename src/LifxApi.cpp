@@ -115,12 +115,21 @@ bool LifxApi::getBulbInfo(String selector){
       String label = root["label"];
       long connected = root["connected"];
       String power = root["power"];
+	  float brightness = root["brightness"];
+	  float hue = root["color"]["hue"];
+	  float saturation = root["color"]["saturation"];
+	  long kelvin = root["color"]["kelvin"];
 
       bulbinfo.id = id;
       bulbinfo.uuid = uuid;
       bulbinfo.label = label;
       bulbinfo.connected = connected;
       bulbinfo.power = power;
+	  bulbinfo.brightness = brightness;
+	  bulbinfo.color.hue = hue;
+	  bulbinfo.color.saturation = saturation;
+	  bulbinfo.brightness = brightness;
+	  bulbinfo.color.kelvin = kelvin;
 
       return true;
   }
