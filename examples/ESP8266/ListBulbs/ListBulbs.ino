@@ -1,10 +1,11 @@
 #include <LifxApi.h>
 
-/*******************************************************************
- *  An example of lifx request that makes a request to the server  *
- *                                                                 *
- *  written by Joeybab3 (joeybab3 on Github)                       *
- *******************************************************************/
+/******************************************************************************************
+ *  An example of lifx request that makes a request to the server                         *
+ *                                                                                        *
+ *  written by Joeybab3 (joeybab3 on Github)                                              *
+ *  http://www.joeybabcock.me/blog/projects/arduino-lifx-api-control-library-for-esp8266/ *
+ ******************************************************************************************/
 
 
 #include <ESP8266WiFi.h>
