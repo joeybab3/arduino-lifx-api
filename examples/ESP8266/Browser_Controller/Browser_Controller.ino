@@ -109,7 +109,7 @@ void loop()
 String handleGet(String cmd)
 {
     api.getBulbInfo(SELECTOR);
-    Serial.println("Handling command " + cmd);
+    Serial.println("Handling command get-" + cmd);
     if (cmd == "brightness")
     {
       return String(api.bulbinfo.brightness);
