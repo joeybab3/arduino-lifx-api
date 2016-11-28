@@ -187,7 +187,7 @@ void handleRoot() {
   msg += "<a href=\"#\" onclick=\"sendCmd('pl');\"><img src=\"http://joeybabcock.me/iot/hosted/play.png\"/></a> \n";
   msg += "<a href=\"#\" onclick=\"sendCmd('pa');\"><img src=\"http://joeybabcock.me/iot/hosted/pause.png\"/></a> \n";
   msg += "<a href=\"#\" onclick=\"sendCmd('nx');\"><img src=\"http://joeybabcock.me/iot/hosted/ff.png\"/></a></p>\n";
-  msg += "<h3>Volume: <span id=\"brt\">"+String(brightness)+"</span><input type=\"hidden\" id='brightness' value='"+String(brightness)+"' onchange=\"setBrightness(this.value)\"/></h3><br/>\n";
+  msg += "<h3>Brightness: <span id=\"brt\">"+String(brightness)+"</span><input type=\"hidden\" id='brightness' value='"+String(brightness)+"' onchange=\"setBrightness(this.value)\"/></h3><br/>\n";
   msg += "<input type=\"range\" class=\"slider\"  min=\"0\" max=\"99\" value=\""+String(brightness)+"\" name=\"volume-slider\" id=\"volume-slider\" onchange=\"setVolume(this.value)\" />\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\">Setting up...</div></p>\n";
   msg += "<p><form action=\"/\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
