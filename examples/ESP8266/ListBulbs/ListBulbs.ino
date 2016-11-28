@@ -62,7 +62,7 @@ void loop() {
       Serial.println("------------------------");
 	  if(api.togglePower("id:"+api.bulbinfo.id))
 	  {
-		  Serial.println("Sucess!");
+		  Serial.println("We toggled the power!");
 	  }
     }
     api_lasttime = millis();

@@ -119,10 +119,19 @@ bool LifxApi::togglePower(String selector){
 	  Serial.println("Label: "+label);
 	  Serial.println("Status: "+status);
 	  Serial.println();
-	  
-      return true;
+	  if(status == "ok")
+	  {
+		  Serial.println("Power toggle was a success!");
+		  return true;
+	  }
+	  else if(status == "offline")
+	  {
+		  Serial.println("Power toggle failed(Bulb Offline).")
+		  return false;
+	  }
+      
   }
-  Serial.println("Root failed.");
+  Serial.println("Parseing response failed.");
   return false;
 }
 
