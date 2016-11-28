@@ -15,7 +15,7 @@
 MDNSResponder mdns;
 #include <ArduinoOTA.h>
 
-#define API_KEY "cabbdc10a24eeb6a7b971691b29d4ed952b4db9876d1d31d129c5451896f7ed4"  // your google apps API Token
+#define API_KEY "lifx-key"  // your lifx API Token
 #define SELECTOR "all" // find more selectors here https://api.developer.lifx.com/docs/selectors
 
 #define SERIAL_DATA_THRESHOLD_MS 500
