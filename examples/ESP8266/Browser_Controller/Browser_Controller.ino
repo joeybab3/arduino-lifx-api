@@ -91,6 +91,7 @@ void setup()
   server.begin();
   Serial.print("HTTP server started on ");
   Serial.println(HTTPPORT);
+  api.getBulbInfo(SELECTOR);
 }
 
 void ethConnectError()
@@ -138,44 +139,51 @@ String handleGet(String cmd)
       return String(api.bulbinfo.id);
     }
 	else{
-		return "That is not a command...";
+		return "Could not get \""+cmd+"\"...";
 	}
 }
 
-void handleInput(String cmd)
+String handleInput(String cmd)
 {
     // Play
     Serial.println("Handling command " + cmd);
     if (cmd == "tp" || cmd == "toggle" || cmd == "togglepower" || cmd == "power")
     {
-      api.togglePower("id:"+api.bulbinfo.id);
+      if(api.togglePower("id:"+api.bulbinfo.id))
+      {
+        return "Toggle power worked.";
+      }
+      else
+      {
+        return "Toggle power failed.";
+      }
     }
     // Pause
     else if (cmd == "t" || cmd == "test")
     {
       Serial.println("test cmd recieved");
+      return "Test cmd recieved";
     }
 	else{
-		return "That is not a command...";
+		return cmd+" is not a command...";
 	}
 }
 
 /* WebServer Stuff */
 
 void handleRoot() {
-  api.getBulbInfo(SELECTOR);
   int brightness = api.bulbinfo.brightness;
   String msg = "<html>\n";
   msg += "<head>\n";
   msg += "<title>ESP8266 Lifx Controller</title>\n";
   msg += "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://joeybabcock.me/iot/hosted/hosted-lifx.css\">";
   msg += "<script src=\"https://code.jquery.com/jquery-3.1.1.min.js\"></script>\n";
-  msg += "<script src=\"http://joeybabcock.me/iot/hosted/hosted-lifx.js\"></script>\n";
+  msg += "<script src=\"http://joeybabcock.me/iot/hosted/hosted-lifx.js\">var power = \""+api.bulbinfo.power+"\";</script>\n";
   msg += "</head>\n";
   msg += "<body>\n";
   msg += "<div id=\"container\">\n";
   msg += "<h1>Lifx - Esp8266 Web Controller!</h1>\n";
-  msg += "<p id=\"linkholder\"><a href=\"#\" onclick=\"sendCmd('pr');\"><img src=\"http://joeybabcock.me/iot/hosted/rw.png\"/></a> \n";
+  msg += "<p id=\"linkholder\"><a href=\"#\" id=\"status\" class='off' onclick=\"togglePower();\"></a> \n";
   msg += "<a href=\"#\" onclick=\"sendCmd('pl');\"><img src=\"http://joeybabcock.me/iot/hosted/play.png\"/></a> \n";
   msg += "<a href=\"#\" onclick=\"sendCmd('pa');\"><img src=\"http://joeybabcock.me/iot/hosted/pause.png\"/></a> \n";
   msg += "<a href=\"#\" onclick=\"sendCmd('nx');\"><img src=\"http://joeybabcock.me/iot/hosted/ff.png\"/></a></p>\n";
@@ -183,7 +191,7 @@ void handleRoot() {
   msg += "<input type=\"range\" class=\"slider\"  min=\"0\" max=\"99\" value=\""+String(brightness)+"\" name=\"volume-slider\" id=\"volume-slider\" onchange=\"setVolume(this.value)\" />\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\"></div></p>\n";
   msg += "<p><form action=\"/\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
-  msg += "<script>var intervalID = window.setInterval(getBrightness, 5000);\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});\n</script>\n";
+  msg += "<script>var intervalID = window.setInterval(getPower, 15000);\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});\n</script>\n";
   msg += "</div>\n";
   msg += "<div id=\"tips\"></div>\n";
   msg == "</body>\n";
@@ -192,14 +200,15 @@ void handleRoot() {
 }
 
 void handleCmd(){
+  String resp;
   for (uint8_t i=0; i<server.args(); i++){
     if(server.argName(i) == "cmd") 
     {
       lastCmd = server.arg(i);
-      handleInput(lastCmd);
+      resp = handleInput(lastCmd);
     }
   }
-  handleResponse();
+  handleResponse(resp);
 }
 
 void handleGt(){
@@ -231,8 +240,8 @@ void handleNotFound() {
 
 }
 
-void handleResponse() {
-      server.send(200, "text/html", "Worked("+lastCmd+")<br/>");
+void handleResponse(String response) {
+      server.send(200, "text/html", response);
       Serial.println("Got client.");
 }
 
