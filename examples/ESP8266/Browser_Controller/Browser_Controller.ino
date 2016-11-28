@@ -137,6 +137,9 @@ String handleGet(String cmd)
     {
       return String(api.bulbinfo.id);
     }
+	else{
+		return "That is not a command...";
+	}
 }
 
 void handleInput(String cmd)
@@ -152,6 +155,9 @@ void handleInput(String cmd)
     {
       Serial.println("test cmd recieved");
     }
+	else{
+		return "That is not a command...";
+	}
 }
 
 /* WebServer Stuff */
