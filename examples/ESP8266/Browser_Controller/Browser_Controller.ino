@@ -184,7 +184,7 @@ void handleRoot() {
   msg += "<div id=\"container\">\n";
   msg += "<h1>Lifx - Esp8266 Web Controller!</h1>\n";
   msg += "<p id=\"linkholder\"><a href=\"#\" id=\"status\" class='off' onclick=\"togglePower();\"></a> \n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('pl');\"><img src=\"http://joeybabcock.me/iot/hosted/up.png\"/></p>\n";
+  msg += "<a href=\"#\" onclick=\"updateStuff();\"><img src=\"http://joeybabcock.me/iot/hosted/up.png\"/></p>\n";
   msg += "<h3>Brightness: <span id=\"brt\">"+String(brightness)+"</span><input type=\"hidden\" id='brightness' value='"+String(brightness)+"' onchange=\"setBrightness(this.value)\"/></h3><br/>\n";
   msg += "<input type=\"range\" class=\"slider\"  min=\"0\" max=\"99\" value=\""+String(brightness)+"\" name=\"volume-slider\" id=\"volume-slider\" onchange=\"setVolume(this.value)\" />\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\">Setting up...</div></p>\n";
