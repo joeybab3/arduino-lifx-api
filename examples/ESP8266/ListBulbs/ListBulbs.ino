@@ -11,7 +11,7 @@
 #include <WiFiClientSecure.h>
 #include <WiFiManager.h>
 
-#define API_KEY "lifx-key"  // your google apps API Token
+#define API_KEY "lifx-key"  // your lifx API Token
 #define SELECTOR "all" // find more selectors here https://api.developer.lifx.com/docs/selectors
 
 
@@ -22,8 +22,6 @@ LifxApi api(API_KEY, client);
 
 int api_mtbs = 15000; //mean time between api requests
 long api_lasttime;   //last time api request has been done
-
-long subs = 0;
 
 void setup() {
 

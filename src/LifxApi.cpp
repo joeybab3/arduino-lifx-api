@@ -126,7 +126,7 @@ bool LifxApi::togglePower(String selector){
 	  }
 	  else if(status == "offline")
 	  {
-		  Serial.println("Power toggle failed(Bulb Offline).")
+		  Serial.println("Power toggle failed(Bulb Offline).");
 		  return false;
 	  }
       
