@@ -189,9 +189,9 @@ void handleRoot() {
   msg += "<a href=\"#\" onclick=\"sendCmd('nx');\"><img src=\"http://joeybabcock.me/iot/hosted/ff.png\"/></a></p>\n";
   msg += "<h3>Volume: <span id=\"brt\">"+String(brightness)+"</span><input type=\"hidden\" id='brightness' value='"+String(brightness)+"' onchange=\"setBrightness(this.value)\"/></h3><br/>\n";
   msg += "<input type=\"range\" class=\"slider\"  min=\"0\" max=\"99\" value=\""+String(brightness)+"\" name=\"volume-slider\" id=\"volume-slider\" onchange=\"setVolume(this.value)\" />\n";
-  msg += "<p>Server Response:<div id=\"response\" class=\"response\"></div></p>\n";
+  msg += "<p>Server Response:<div id=\"response\" class=\"response\">Setting up...</div></p>\n";
   msg += "<p><form action=\"/\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
-  msg += "<script>var intervalID = window.setInterval(getPower, 15000);\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});getPower();\n</script>\n";
+  msg += "<script>$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});getPower();\n</script>\n";
   msg += "</div>\n";
   msg += "<div id=\"tips\"></div>\n";
   msg == "</body>\n";
