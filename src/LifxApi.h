@@ -57,7 +57,7 @@ class LifxApi
 	bool togglePower(String selector);
     BulbInfo bulbinfo;
 	//const char* fingerprint = "‎9D:01:5C:8E:FD:4D:DF:71:A4:99:CE:29:93:40:3F:5F:EE:74:d0:95";
-    const char* fingerprint = "3F:AE:17:DA:03:65:45:BE:CE:77:2F:8A:DC:5B:C9:08:98:7E:9E:E7";  //Lifx https Certificate
+    const char* fingerprint = "‎E3:69:05:13:32:74:C0:37:F8:6C:B8:A7:18:98:87:B7:CD:DD:86:F0";  //Lifx https Certificate
 	
 
   private:
