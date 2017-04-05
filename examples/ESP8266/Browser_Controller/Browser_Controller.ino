@@ -14,6 +14,7 @@
 #include <ESP8266mDNS.h>
 MDNSResponder mdns;
 #include <ArduinoOTA.h>
+#include <ctype.h>
 
 #define API_KEY "lifx-key"  // your lifx API Token
 #define SELECTOR "all" // find more selectors here https://api.developer.lifx.com/docs/selectors
@@ -31,7 +32,7 @@ LifxApi api(API_KEY, client);
 
 int api_mtbs = 15000; //mean time between api requests
 long api_lasttime;   //last time api request has been done
-
+int duration = 0;
 String lastCmd;
 
 #define HTTPPORT 88
@@ -164,6 +165,40 @@ String handleInput(String cmd)
       Serial.println("test cmd recieved");
       return "Test cmd recieved";
     }
+	else if (cmd.startsWith("d") || cmd.startsWith("D"))
+    {
+      Serial.println("Set duration to"+cmd.substring(1,cmd.length()));
+	  duration = cmd.substring(1,cmd.length()).toInt();
+      return "Setting duration.";
+    }
+	else if (cmd.startsWith("c") || cmd.startsWith("C"))
+    {
+      Serial.println("Set color to"+cmd.substring(1,cmd.length()));
+	  if(api.setState(SELECTOR, "color", "\"#"+cmd.substring(1,cmd.length())+"\"", duration))
+      {
+        return "Set color.";
+      }
+      else
+      {
+        return "Set color failed.";
+      }
+    }
+	else if (cmd.startsWith("b") || cmd.startsWith("B"))
+    {
+      Serial.println("Set brightness to"+cmd.substring(1,cmd.length()));
+	  if(api.setState(SELECTOR, "brightness", cmd.substring(1,cmd.length()), duration))
+      {
+        return "Set brightness.";
+      }
+      else
+      {
+        return "Set brightness failed.";
+      }
+    }
+	else if (isDigit(cmd.charAt(0)))
+    {
+      return "You typed a digit.";
+    }
 	else{
 		return cmd+" is not a command...";
 	}
@@ -184,15 +219,27 @@ void handleRoot() {
   msg += "<div id=\"container\">\n";
   msg += "<h1>Lifx - Esp8266 Web Controller!</h1>\n";
   msg += "<p id=\"linkholder\"><a href=\"#\" id=\"status\" class='off' onclick=\"togglePower();\"></a> \n";
-  msg += "<a href=\"#\" onclick=\"updateStuff();\"><img src=\"http://joeybabcock.me/iot/hosted/up.png\"/></a></p>\n";
+  msg += "<a href=\"#\" onclick=\"updateStuff();\"><img src=\"http://joeybabcock.me/iot/hosted/up.png\"/></a>\n";
+  msg += "<input type=\"color\" id=\"colorinput\" /></p>\n";
   msg += "<h3>Brightness: <span id=\"brt\">"+String(brightness)+"</span><input type=\"hidden\" id='brightness' value='"+String(brightness)+"' onchange=\"setBrightness(this.value)\"/></h3><br/>\n";
   msg += "<input type=\"range\" class=\"slider\"  min=\"0\" max=\"99\" value=\""+String(brightness)+"\" id=\"brightness-slider\" onchange=\"setBrightness(this.value)\" />\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\">Setting up...</div></p>\n";
   msg += "<p><form action=\"/\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
-  msg += "<script>$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});getPower();\n</script>\n";
+  msg += "<script>\n";
+  msg += "$('#console').submit(function(){\n";
+  msg += "parseCmd($(\"#console_text\").val());\n";
+  msg += "return false;\n";
+  msg += "});\n";
+  msg += "$('#colorinput').on('input', function() {\n";
+  msg += "parseCmd(\"c\"+$(this).val().substr(1));\n";
+  msg += "$('#container').css('background-color', $(this).val());\n";
+  msg += "});\n";
+  msg += "getBrightness();\n";
+  msg += "getPower();\n";
+  msg += "</script>\n";
   msg += "</div>\n";
   msg += "<div id=\"tips\"></div>\n";
-  msg == "</body>\n";
+  msg += "</body>\n";
   msg += "</html>\n";
   server.send(200, "text/html", msg);
 }

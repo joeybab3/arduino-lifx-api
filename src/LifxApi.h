@@ -52,9 +52,10 @@ class LifxApi
 {
   public:
     LifxApi (String apiKey, Client &client);
-    String sendReqToLifx(String command, String type);
+    String sendReqToLifx(String command, String type, String content);
     bool getBulbInfo(String selector);
 	bool togglePower(String selector);
+	bool setState(String selector, String param, String value, int duration);
     BulbInfo bulbinfo;
 	//const char* fingerprint = "‎9D:01:5C:8E:FD:4D:DF:71:A4:99:CE:29:93:40:3F:5F:EE:74:d0:95";
     const char* fingerprint = "‎E3:69:05:13:32:74:C0:37:F8:6C:B8:A7:18:98:87:B7:CD:DD:86:F0";  //Lifx https Certificate
