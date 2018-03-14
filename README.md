@@ -9,5 +9,7 @@ It can query the status of the bulb to find things like color/brightness/hue, as
 I need to do a few things:
 
 1. Add multiple bulb support
+
 2. Fix implementation of Json library(it kind of does a wierd substring to get rid of some content)
-3. Esp32...
+
+~~3. Esp32...~~
