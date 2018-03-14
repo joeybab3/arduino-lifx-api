@@ -135,7 +135,7 @@ bool LifxApi::togglePower(String selector){
 	  }
       
   }
-  Serial.println("Parseing response failed.");
+  Serial.println("Parsing response failed.");
   return false;
 }
 
