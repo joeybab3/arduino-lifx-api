@@ -12,4 +12,4 @@ I need to do a few things:
 
 2. Fix implementation of Json library(it kind of does a wierd substring to get rid of some content)
 
-~~3. Esp32...~~
+3. ~~Esp32...~~
