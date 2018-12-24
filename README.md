@@ -6,10 +6,4 @@ It requires the [ArduinoJson Library](https://github.com/bblanchon/ArduinoJson)
 
 It can query the status of the bulb to find things like color/brightness/hue, as well as toggle the power, and set the state of the bulb (change brightness, color, hue, anything...).
 
-I need to do a few things:
-
-1. Add multiple bulb support
-
-2. Fix implementation of Json library(it kind of does a wierd substring to get rid of some content)
-
-3. ~~Esp32...~~
+Arduino-Lifx-Api can  be run on ESP8266 and ESP32(including M5Stack).
